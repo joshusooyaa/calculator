@@ -6,8 +6,8 @@ This readme contains several sections:
 2. Problem
     * This includes the details regarding the project and my re-explanation into my own words of what is expected.
 3. Process
-    * This includes the steps taken to solve the problem (more so of my organization before I start + and through iterations)
-    * Also includes algorithms and any overview + explanation, along with any pseudocode I felt was necessary before coding those sub problems.
+    * This includes the steps taken to solve the problem (more so of my organization before I start each sub problem + and through iterations)
+    * Also includes algorithms and any overview + explanation, along with any pseudocode I felt was necessary before coding to solve each sub problem.
 
 # How to use
 WIP
@@ -21,11 +21,13 @@ To create a calculator, several crutial elements are required. These include:
 4. A multiply button
 5. A divide button
 6. An equals button
+7. A display window
 7. *A decimal button*\*
 8. *A clear/ clear all button*\*\
+9. *+/- button*\*\
 <small><small>* All though not required, these are fairly essential to have if this calculator is to be reliable.</small></small>
 
 
 # Steps
 ## 1. Calculator UI
-To start, a simple UI (to start) should be created fulfilling all the requirements outlined in the `Problem` section for this sub problem. From there, functionality can then slowly be added in.
+To start, a simple UI (to start) should be created fulfilling all the requirements outlined in the `Problem` section for this sub problem. From there, functionality can then slowly be added in. To do this, the base HTML will need to be created first, along with a simple linked style sheet. Styling will be improved on towards the end once all functionality has been added. 
