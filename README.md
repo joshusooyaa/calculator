@@ -64,7 +64,7 @@ return calculations[operand](var1, var2);
 ```
 
 ## 3. Button Actions
-### **Number Pressed** ###
+### **Number Pressed**
 This should be separated into two distinct problems:
 1. Displaying the number that was pressed
 2. Linking to the operate function
@@ -74,7 +74,8 @@ This should be separated into two distinct problems:
 To display the number there needs to be an event listener linked to each number button. The function that is called should have access to the display div, and update the text content there.
 
 *Operation*\
-a
+-- To do
+
 
 
 
