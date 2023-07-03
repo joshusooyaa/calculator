@@ -11,13 +11,26 @@ This readme contains several sections:
 
 # How to use
 This is a simple calculator with simple functionality. It's used just like any other calculator one might come across. 
+
+### Features
+1. Hotkeys
+2. Chaining together a simple sequence, ex: 11 + 44 - 12 * 55 / 12
+3. Pressing the equal sign will continue to repeat the previous operand with operator on the solution
+      * Ex: 10 + 10 --> 20 (click equal) --> 30 (uses the second operand with previous operator, so total + 10)
+4. Pressing an operator sign twice (after a single calculation) will use that operator on the previously used number with the current calculated number
+      * Ex: 10 + 5 --> 15 (click multiply twice) --> 75 (uses 5 and multiplies it by 15)
+5. Delete key -- allows for recently inputted numbers (or if the most recent input was an operator) to be undone.
+      * Ex: 10 + 5 --> 15, user then presses + --> delete can be used to remove this +
+      * Ex: 10 is inputted, the delete key can be used to remove 0 and then 1 back to 0.
+6. Operators can be re-chosen before calculation
+
 ### Hotkeys
 `0-9` on a numberpad or on the toprow for digits.\
 `]` for addition\
 `-` for subtraction\
 `/` for division\
 `x` for multiplication\
-`Backspace` to undo (not everything is undoable)\
+`Backspace` to delete (not everything is undoable)\
 `c` to clear all\
 `.` for decimal\
 `F9` to negate\
