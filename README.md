@@ -10,7 +10,21 @@ This readme contains several sections:
     * Also includes algorithms and any overview + explanation, along with any pseudocode I felt was necessary before coding to solve each sub problem.
 
 # How to use
-WIP
+This is a simple calculator with simple functionality. It's used just like any other calculator one might come across. 
+### Hotkeys
+`0-9` on a numberpad or on the toprow for digits.\
+`]` for addition\
+`-` for subtraction\
+`/` for division\
+`x` for multiplication\
+`Backspace` to undo (not everything is undoable)\
+`c` to clear all\
+`.` for decimal\
+`F9` to negate\
+`Enter` to calculate 
+
+
+
 
 # Problem
 ## Calculator UI
