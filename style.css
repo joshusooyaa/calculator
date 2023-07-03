@@ -21,9 +21,9 @@ body {
   text-align: center;
   width: 22vw;
   height: 65vh;
-  border: .4vh solid rgb(44, 44, 44);
-  border-radius: .6vh;
-  box-shadow: 0 0 3vh black;
+  border: .8vh solid rgb(44, 44, 44);
+  border-radius: .9vh;
+  box-shadow: 0 0 4vh rgb(20, 20, 20);
   margin-top: 5vh;
   min-height: 200px;
   min-width: 200px;
