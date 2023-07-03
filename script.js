@@ -17,6 +17,8 @@
   const equalButton = document.querySelector('.calc-buttons .equal-button'); 
   const decimalButton = document.querySelector('.calc-buttons .decimal');
 
+  calculationDisplayTextSize = window.getComputedStyle(calculationDisplay).fontSize;
+
   const operators = {
     '+': (a, b) => Number(a) + Number(b), // to avoid a + b = 'ab'
     '-': (a, b) => a - b,
@@ -24,7 +26,7 @@
     '/': (a, b) => a / b,
   }
 
-  /* event listener functions */
+  /* callback functions */
   function operate(var1, operator, var2) {
     result = operators[operator](var1, var2);
     return parseFloat(result.toFixed(5));
@@ -66,6 +68,8 @@
     calculationDisplay.textContent = '';
     currentOperator = firstOperand = secondOperand = null;
     decimalInNumber = false;
+    currentDisplay.style.fontSize = window.getComputedStyle(currentDisplay).fontSize;
+    calculationDisplay.style.fontSize = window.getComputedStyle(calculationDisplay).fontSize;
   }
 
   function checkCalculable(e) {
@@ -101,6 +105,21 @@
     decimalInNumber = true;
   }
 
+  function checkDisplayContentSize(mutationList) {
+    for (const mutation of mutationList) {
+      let currentNode = mutation.target;
+      let parentNode = currentNode.parentNode;
+      if (currentNode.clientWidth < parentNode.clientWidth) {
+        currentNode.style.fontSize = 
+              currentNode.className === 'current-display'? '7.5vh' : "2.2vh";
+      }
+      while (currentNode.clientWidth > parentNode.clientWidth) {
+        let currentFontSize = parseFloat(window.getComputedStyle(currentNode).fontSize);
+        currentNode.style.fontSize = (currentFontSize - 1) + "px";
+      }
+    }
+  }
+
   /* Helper functions */
   function updateCalculationDisplay(justCalculated) {
     if (justCalculated) {
@@ -115,6 +134,7 @@
   function cleanCurrentDisplay(clearWith='') {
     currentDisplay.textContent = clearWith;
     needToCleanCurrentDisplay = false;
+    currentDisplay.style.fontSize = window.getComputedStyle(currentDisplay).fontSize;;
   }
 
   /* event listeners */
@@ -124,5 +144,12 @@
   clearButton.addEventListener('click', clearEverything);
   equalButton.addEventListener('click', checkCalculable)
   decimalButton.addEventListener('click', addDecimal);
+  
+  // Mutation Observer for when large number in calculator
+  const observer = new MutationObserver(checkDisplayContentSize)
+  var config = {childList: true, characterData: true, subtree: true};
+  observer.observe(currentDisplay, config);
+  observer.observe(calculationDisplay, config);
+  
 
 })()
