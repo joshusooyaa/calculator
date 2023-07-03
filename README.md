@@ -94,6 +94,7 @@ Now that we have the operator functionality set up, all that's left to do here i
 if operator in use
     check if there is a second variable
         call operate (function we defined earlier)
+        update firstOperand to calculated value
 ```
 
 
