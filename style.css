@@ -5,7 +5,7 @@ body {
   margin: 0;
   height: 100vh;
 
-  background-image: radial-gradient(ellipse, rgba(200, 220, 240, 0.9) 40%, rgba(180, 210, 240, 0.9) 70%, rgba(190, 205, 230, 0.9) 100%);
+  background-image: radial-gradient(circle, rgba(200, 220, 240, 0.9) 40%, rgba(180, 210, 240, 0.9) 70%, rgba(190, 205, 230, 0.9) 100%);
 }
 
 .calc-header {
@@ -38,21 +38,18 @@ body {
   height: 20%;
   font-size: var(--main-display-size);
   flex: 1;
-
   
   border: .12vw solid black;
   box-sizing: border-box;
   border-bottom: .15vw solid black;
-  padding-bottom: .2vw;
 }
 
 .calculator .display .calculation-display {
   --smaller-font-size: 2vh;
   
-  flex: 1;
   font-size: var(--smaller-font-size); 
   white-space: nowrap;
-  margin-right: 1%;
+  margin: .5vw;
 
 }
 
@@ -60,7 +57,7 @@ body {
   flex: 2;
   display: flex;
   align-items: flex-end;
-  margin-right: 1%;
+  margin-right: .5vw;
 }
 
 .calculator .display p {
@@ -101,7 +98,7 @@ body {
 }
 
 button {
-  background-image: radial-gradient(ellipse, rgba(197, 197, 197, 0.9) 5%, rgba(211, 211, 211, 0.9) 5%, rgba(255, 255, 255, 0.9) 100%);
+  background-image: radial-gradient(ellipse, rgb(201, 201, 201) 0%, rgba(211, 211, 211, 0.9) 20%, rgba(255, 255, 255, 0.9) 140%);
 }
 
 .calc-buttons div button {
