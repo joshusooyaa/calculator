@@ -15,11 +15,12 @@ body {
 
 .calculator .display {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column; 
+  justify-content: flex-start;
   align-items: flex-end;
   width: 100%;
   height: 20%;
-  font-size: 5vh;
+  font-size: 7vh;
   flex: 1;
 
   background-color: grey;
@@ -27,6 +28,19 @@ body {
   box-sizing: border-box;
   border-bottom: .15vw solid black;
   padding-bottom: .2vw;
+}
+
+.calculator .display .calculation-display {
+  flex: 1;
+  font-size: 3vh; 
+}
+
+.calculator .display .current-display {
+  flex: 2;
+}
+
+.calculator .display p {
+  margin: 0;
 }
 
 .calculator .calc-buttons {

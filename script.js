@@ -1,12 +1,16 @@
 (function () {
   /* "global" variables */
   let displayContent = '';
+  let currentOperator = null;
+  let needToCleanCurrentDisplay = false;
+  let firstOperand = null;
 
   /* elements */
   const currentDisplay = document.querySelector('.display .current-display');
-  const previousDisplay = document.querySelector('.display .previous-display');
+  const calculationDisplay = document.querySelector('.display .calculation-display');
   const numberButtons = document.querySelectorAll('.calc-buttons .num-button');
   const clearButton = document.querySelector('.calc-buttons .clear');
+  const operatorButtons = document.querySelectorAll('.calc-buttons .operator');
 
 
   const operators = {
@@ -22,19 +26,43 @@
   }
 
   function addNumberToDisplay() {
-    let numberPressed = this.textContent;
-    if (currentDisplay.textContent === '0') currentDisplay.textContent = numberPressed;
-    else currentDisplay.textContent += numberPressed;
+    let numberToAdd = this.textContent;
+    if (needToCleanCurrentDisplay) cleanCurrentDisplay();
+    if (currentDisplay.textContent === '0') currentDisplay.textContent = numberToAdd;
+    else currentDisplay.textContent += numberToAdd;
     displayContent = currentDisplay.textContent;
   }
 
-  function clearDisplay() {
+  function addOperatorToDisplay() {
+    if (currentOperator) return;
+
+    currentOperator = this.textContent;
+    updateCalculationDisplay();
+    needToCleanCurrentDisplay = true;
+    firstOperand = currentDisplay.textContent;
+  }
+
+  function clearEverything() {
     currentDisplay.textContent = '0';
-    previousDisplay.textContent = '';
+    calculationDisplay.textContent = '';
     displayContent = '';
+    currentOperator = null;
+  }
+
+  /* Helper functions */
+  function updateCalculationDisplay() {
+    calculationDisplay.textContent = currentDisplay.textContent + " " + currentOperator;
+  }
+
+  function cleanCurrentDisplay() {
+    currentDisplay.textContent = '';
+    needToCleanCurrentDisplay = false;
   }
 
   /* event listeners */
   numberButtons.forEach(button => button.addEventListener('click', addNumberToDisplay));
-  clearButton.addEventListener('click', clearDisplay);
+  operatorButtons.forEach(button => button.addEventListener('click', addOperatorToDisplay));
+
+  clearButton.addEventListener('click', clearEverything);
+
 })()
