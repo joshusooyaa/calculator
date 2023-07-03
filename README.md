@@ -31,3 +31,5 @@ To create a calculator, several crutial elements are required. These include:
 # Steps
 ## 1. Calculator UI
 To start, a simple UI (to start) should be created fulfilling all the requirements outlined in the `Problem` section for this sub problem. From there, functionality can then slowly be added in. To do this, the base HTML will need to be created first, along with a simple linked style sheet. Styling will be improved on towards the end once all functionality has been added. 
+
+In regards to styling, I considered using a grid system for the buttons, and although this would make more sense, I was having issues centering the text in each button without causing other issues. Due to this, and also because I want to improve on working with flex, I used flex-wrap in combination with width %s to ensure every button was the same size.
