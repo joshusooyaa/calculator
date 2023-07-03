@@ -24,18 +24,18 @@ body {
   border: .4vh solid rgb(44, 44, 44);
   border-radius: .6vh;
   box-shadow: 0 0 3vh black;
-  overflow: hidden;
   margin-top: 5vh;
   min-height: 200px;
   min-width: 200px;
+  z-index: 1000;
 }
 
 .calculator .display {
   --main-display-size: 7vh;
   align-self: center;
-  
+
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   justify-content: flex-start;
   align-items: flex-end;
   width: 100%;
@@ -43,7 +43,7 @@ body {
   font-size: var(--main-display-size);
   flex: 1;
   padding: 0;
-  
+
   border: .12vw solid rgb(44, 44, 44);
   box-sizing: border-box;
   border-bottom: .15vw solid black;
@@ -52,8 +52,8 @@ body {
 
 .calculator .display .calculation-display {
   --smaller-font-size: 2vh;
-  
-  font-size: var(--smaller-font-size); 
+
+  font-size: var(--smaller-font-size);
   white-space: nowrap;
   margin: .4vw;
 
@@ -121,7 +121,8 @@ button {
   transition: background-color .5s, transform .15s, box-shadow .2s;
 }
 
-button:active, button.active {
+button:active,
+button.active {
   transform: scale(.99);
   box-shadow: 0 0 .65vh rgb(44, 44, 44);
 }
@@ -136,7 +137,7 @@ button:hover {
   justify-content: center;
   margin: 3vh;
   font-size: 2.5vh;
-  
+
 }
 
 .footer p a {
@@ -149,7 +150,7 @@ button:hover {
   margin-left: .35vw;
   height: 2.5vh;
   fill: var(--text-color);
-  
+
   transition: transform .65s;
 }
 
