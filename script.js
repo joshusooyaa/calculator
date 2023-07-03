@@ -16,8 +16,7 @@
   const operatorButtons = document.querySelectorAll('.calc-buttons .operator');
   const equalButton = document.querySelector('.calc-buttons .equal-button'); 
   const decimalButton = document.querySelector('.calc-buttons .decimal');
-
-  calculationDisplayTextSize = window.getComputedStyle(calculationDisplay).fontSize;
+  const negateButton = document.querySelector('.calc-buttons .negate');
 
   const operators = {
     '+': (a, b) => Number(a) + Number(b), // to avoid a + b = 'ab'
@@ -76,19 +75,11 @@
     if (secondOperand == 0 && currentOperator === '/') {
       clearEverything();
       currentDisplay.textContent = 'ERROR';
+      resetNumberDisplay = (e === true) ? false : true; 
+      return;
     }
-    if (currentOperator && secondOperand) {
-      let calculatedValue = operate(firstOperand, currentOperator, secondOperand);
-      currentDisplay.textContent = calculatedValue;
-      needToCleanCurrentDisplay = true;
-      justCalculated = true;
-      updateCalculationDisplay(true);
-      firstOperand = calculatedValue;
-      decimalInNumber = false;
-    } 
-
-    // Checking if e is an event or not
-    resetNumberDisplay = (e === true) ? false : true; 
+    if (currentOperator && secondOperand) calculateValue(firstOperand, currentOperator, secondOperand);
+    else if (currentOperator) calculateValue(firstOperand, currentOperator, firstOperand);
   }
 
   function addDecimal() {
@@ -105,8 +96,11 @@
     decimalInNumber = true;
   }
 
+  function negateNumber() {
+    console.log("Negating");
+  }
+
   function checkDisplayContentSize(mutationList) {
-    console.log("TEST");
     for (const mutation of mutationList) {
       let currentNode = mutation.target;
       let parentNode = currentNode.parentNode;
@@ -137,6 +131,18 @@
     currentDisplay.style.fontSize = window.getComputedStyle(currentDisplay).fontSize;;
   }
 
+  function calculateValue(first, op, second) {
+    let calculatedValue = operate(first, op, second);
+    currentDisplay.textContent = calculatedValue;
+    needToCleanCurrentDisplay = true;
+    justCalculated = true;
+    if (secondOperand == null) secondOperand = second;
+    updateCalculationDisplay(true);
+    firstOperand = calculatedValue;
+    decimalInNumber = false;
+    resetNumberDisplay = (e === true) ? false : true; 
+  }
+
   /* event listeners */
   numberButtons.forEach(button => button.addEventListener('click', addNumberToDisplay));
   operatorButtons.forEach(button => button.addEventListener('click', addOperatorToDisplay));
@@ -144,7 +150,9 @@
   clearButton.addEventListener('click', clearEverything);
   equalButton.addEventListener('click', checkCalculable)
   decimalButton.addEventListener('click', addDecimal);
+  negateButton.addEventListener('click', negateNumber);
   
+
   // Mutation Observer for when large number in calculator
   const observer = new MutationObserver(checkDisplayContentSize)
   var config = {childList: true, characterData: true, subtree: true};
