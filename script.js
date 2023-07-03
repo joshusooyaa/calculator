@@ -6,6 +6,7 @@
   let secondOperand = null;
   let justCalculated = false;
   let resetNumberDisplay = true;
+  let decimalInNumber = false;
 
   /* elements */
   const currentDisplay = document.querySelector('.display .current-display');
@@ -14,6 +15,7 @@
   const clearButton = document.querySelector('.calc-buttons .clear');
   const operatorButtons = document.querySelectorAll('.calc-buttons .operator');
   const equalButton = document.querySelector('.calc-buttons .equal-button'); 
+  const decimalButton = document.querySelector('.calc-buttons .decimal');
 
   const operators = {
     '+': (a, b) => Number(a) + Number(b), // to avoid a + b = 'ab'
@@ -46,6 +48,7 @@
   }
 
   function addOperatorToDisplay() {
+    decimalInNumber = false;
     if (currentOperator && !justCalculated) {
       currentOperator = this.textContent;
       checkCalculable(true);
@@ -62,7 +65,7 @@
     currentDisplay.textContent = '0';
     calculationDisplay.textContent = '';
     currentOperator = firstOperand = secondOperand = null;
-    
+    decimalInNumber = false;
   }
 
   function checkCalculable(e) {
@@ -77,9 +80,25 @@
       justCalculated = true;
       updateCalculationDisplay(true);
       firstOperand = calculatedValue;
+      decimalInNumber = false;
     } 
 
-    resetNumberDisplay = e === true ? false : true; 
+    // Checking if e is an event or not
+    resetNumberDisplay = (e === true) ? false : true; 
+  }
+
+  function addDecimal() {
+    if (justCalculated && resetNumberDisplay) {
+      justCalculated = false;
+      clearEverything();
+    }
+
+    if (decimalInNumber) return;
+
+    if (needToCleanCurrentDisplay) cleanCurrentDisplay('0');
+    
+    currentDisplay.textContent += '.'
+    decimalInNumber = true;
   }
 
   /* Helper functions */
@@ -93,8 +112,8 @@
     }
   }
 
-  function cleanCurrentDisplay() {
-    currentDisplay.textContent = '';
+  function cleanCurrentDisplay(clearWith='') {
+    currentDisplay.textContent = clearWith;
     needToCleanCurrentDisplay = false;
   }
 
@@ -104,5 +123,6 @@
 
   clearButton.addEventListener('click', clearEverything);
   equalButton.addEventListener('click', checkCalculable)
+  decimalButton.addEventListener('click', addDecimal);
 
 })()
