@@ -23,7 +23,7 @@ To create a calculator, several crutial elements are required. These include:
 6. An equals button
 7. A display window
 7. *A decimal button*\*
-8. *A clear/ clear all button*\*\
+8. *A clear/ clear all button*\*
 9. *+/- button*\*\
 <small><small>* All though not required, these are fairly essential to have if this calculator is to be reliable.</small></small>
 
