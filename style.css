@@ -2,6 +2,15 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0;
+  height: 100vh;
+
+  background-image: radial-gradient(ellipse, rgba(200, 220, 240, 0.9) 40%, rgba(180, 210, 240, 0.9) 70%, rgba(190, 205, 230, 0.9) 100%);
+}
+
+.calc-header {
+  font-size: 8vh;
+  margin-top: 2vh;
 }
 
 .calculator {
@@ -11,6 +20,11 @@ body {
   text-align: center;
   width: 22vw;
   height: 65vh;
+  border: .5vh solid rgb(44, 44, 44);
+  border-radius: .5vh;
+  box-shadow: 0 0 3vh black;
+  overflow: hidden;
+  margin-top: 5vh;
 }
 
 .calculator .display {
@@ -25,7 +39,7 @@ body {
   font-size: var(--main-display-size);
   flex: 1;
 
-  background-color: grey;
+  
   border: .12vw solid black;
   box-sizing: border-box;
   border-bottom: .15vw solid black;
@@ -58,7 +72,6 @@ body {
   width: 100%;
   height: 80%;
 
-  background-color: grey;
   border: .1vw solid black;
   box-sizing: border-box;
 }
@@ -87,6 +100,10 @@ body {
   width: 100%;
 }
 
+button {
+  background-image: radial-gradient(ellipse, rgba(197, 197, 197, 0.9) 5%, rgba(211, 211, 211, 0.9) 5%, rgba(255, 255, 255, 0.9) 100%);
+}
+
 .calc-buttons div button {
   display: flex;
   align-items: center;
@@ -94,8 +111,41 @@ body {
   border: .1vw solid black;
   box-sizing: border-box;
   font-size: 5vh;
+  transition: background-color .5s, transform .15s, box-shadow .2s;
 }
 
 button:active, button.active {
-  transform: scale(.98);
+  transform: scale(.99);
+  box-shadow: 0 0 .65vh black;
+}
+
+button:hover {
+  background-color: rgba(59, 59, 59, 0.9)
+}
+
+.footer p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 3vh;
+  font-size: 2.5vh;
+}
+
+.footer p a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer img {
+  margin-left: .35vw;
+  height: 2.5vh;
+  fill: var(--text-color);
+  
+  transition: transform .65s;
+}
+
+.footer img:hover {
+  transform: scale(1.125);
+  cursor: pointer;
 }
