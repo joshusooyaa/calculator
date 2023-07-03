@@ -26,7 +26,7 @@
     '+': (a, b) => Number(a) + Number(b), // to avoid a + b = 'ab'
     '-': (a, b) => a - b,
     'x': (a, b) => a * b,
-    '/': (a, b) => a / b,
+    '÷': (a, b) => a / b,
   }
 
   /* callback functions */
@@ -58,6 +58,10 @@
 
   function addOperatorToDisplay() {
     decimalInNumber = false;
+    if (currentDisplay.textContent === 'ERROR') {
+      clearEverything();
+      return;
+    }
     if (currentOperator && !justCalculated) {
       currentOperator = this.textContent;
       if (currentOperator == previousOperator) {
@@ -88,7 +92,7 @@
   }
 
   function checkCalculable(e) {
-    if (secondOperand == 0 && currentOperator === '/') {
+    if (secondOperand == 0 && currentOperator === '÷') {
       clearEverything();
       currentDisplay.textContent = 'ERROR';
       resetNumberDisplay = (e === true) ? false : true; 
@@ -127,9 +131,9 @@
   }
 
   function erasePreviousInput() {
-    console.log(canErase);
     let displayContent = currentDisplay.textContent;
-    if (justUpdatedOperator) {
+    if (displayContent == "ERROR") clearEverything();
+    else if (justUpdatedOperator) {
       currentOperator = previousOperator = null;
       justUpdatedOperator = false;
       canErase = false;
