@@ -209,6 +209,19 @@
   window.addEventListener('resize', () => {
     checkDisplayContentSize([{target: currentDisplay}, {target: calculationDisplay}])
   })
-  
+
+  window.addEventListener('keydown', (event) => {
+    console.log(event.code);
+    const button = document.querySelector(`button[data-key~="${event.code}"]`);
+    if (button && !button.classList.contains('.active')) {
+      button.classList.toggle('active');
+      button.click();
+    }
+  });
+
+  window.addEventListener('keyup', (event) => {
+    const button = document.querySelector(`button[data-key~="${event.code}"]`);
+    if (button) button.classList.toggle('active');
+  });
 
 })()

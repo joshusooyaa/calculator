@@ -1,9 +1,3 @@
-.erase:active {
-  transform: scale(1);
-  transition: background-color .05s;
-  background-color: rgb(82, 28, 28);
-}
-
 body {
   display: flex;
   flex-direction: column;
@@ -97,9 +91,10 @@ body {
   font-size: 5vh;
 }
 
-button:active {
+button:active, button.active {
   transform: scale(.98);
 }
+
 
 /*
 .calculator .calc-buttons {
