@@ -51,7 +51,7 @@ body {
   width: 25%;
 }
 
-.calc-buttons .left-side div {
+.calc-buttons .left-side button {
   width: calc(100% / 3);
 }
 
@@ -59,17 +59,21 @@ body {
   width: calc(100% / 3 * 2);
 }
 
-.calc-buttons .right-side div {
+.calc-buttons .right-side button {
   width: 100%;
 }
 
-.calc-buttons div div {
+.calc-buttons div button {
   display: flex;
   align-items: center;
   justify-content: center;
   border: .1vw solid black;
   box-sizing: border-box;
   font-size: 5vh;
+}
+
+button:active {
+  transform: scale(.98);
 }
 
 /*
