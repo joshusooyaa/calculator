@@ -106,12 +106,12 @@
   }
 
   function checkDisplayContentSize(mutationList) {
+    console.log("TEST");
     for (const mutation of mutationList) {
       let currentNode = mutation.target;
       let parentNode = currentNode.parentNode;
       if (currentNode.clientWidth < parentNode.clientWidth) {
-        currentNode.style.fontSize = 
-              currentNode.className === 'current-display'? '7.5vh' : "2.2vh";
+        currentNode.style.removeProperty('font-size')
       }
       while (currentNode.clientWidth > parentNode.clientWidth) {
         let currentFontSize = parseFloat(window.getComputedStyle(currentNode).fontSize);
@@ -150,6 +150,10 @@
   var config = {childList: true, characterData: true, subtree: true};
   observer.observe(currentDisplay, config);
   observer.observe(calculationDisplay, config);
+
+  window.addEventListener('resize', () => {
+    checkDisplayContentSize([{target: currentDisplay}, {target: calculationDisplay}])
+  })
   
 
 })()

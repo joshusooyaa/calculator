@@ -1,4 +1,3 @@
-
 .negate:active, .decimal:active, .erase:active {
   transform: scale(1);
   transition: background-color .05s;
@@ -21,13 +20,15 @@ body {
 }
 
 .calculator .display {
+  --main-display-size: 7vh;
+  
   display: flex;
   flex-direction: column; 
   justify-content: flex-start;
   align-items: flex-end;
   width: 100%;
   height: 20%;
-  font-size: 7vh;
+  font-size: var(--main-display-size);
   flex: 1;
 
   background-color: grey;
@@ -38,8 +39,10 @@ body {
 }
 
 .calculator .display .calculation-display {
+  --smaller-font-size: 2.2vh;
+  
   flex: 1;
-  font-size: 2.2vh; 
+  font-size: var(--smaller-font-size); 
   white-space: nowrap;
 }
 
