@@ -37,7 +37,7 @@
 
     if (needToCleanCurrentDisplay) cleanCurrentDisplay();
     
-    if (currentDisplay.textContent === '0') currentDisplay.textContent = numberToAdd;
+    if (currentDisplay.textContent === '0' || currentDisplay.textContent === 'ERROR') currentDisplay.textContent = numberToAdd;
     else currentDisplay.textContent += numberToAdd;
     
     if (currentOperator) secondOperand = currentDisplay.textContent;
@@ -62,6 +62,10 @@
   }
 
   function checkCalculable() {
+    if (secondOperand == 0) {
+      clearEverything();
+      currentDisplay.textContent = 'ERROR';
+    }
     if (currentOperator && secondOperand) {
       let calculatedValue = operate(firstOperand, currentOperator, secondOperand);
       currentDisplay.textContent = calculatedValue;
