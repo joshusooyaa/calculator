@@ -1,4 +1,4 @@
-.negate:active, .decimal:active, .erase:active {
+.erase:active {
   transform: scale(1);
   transition: background-color .05s;
   background-color: rgb(82, 28, 28);

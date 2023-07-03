@@ -1,12 +1,15 @@
 (function () {
   /* "global" variables */
   let currentOperator = null;
+  let justUpdatedOperator = false;
   let needToCleanCurrentDisplay = false;
   let firstOperand = null;
   let secondOperand = null;
   let justCalculated = false;
   let resetNumberDisplay = true;
   let decimalInNumber = false;
+  let canErase = true;
+  let previousOperator = null;
 
   /* elements */
   const currentDisplay = document.querySelector('.display .current-display');
@@ -17,6 +20,7 @@
   const equalButton = document.querySelector('.calc-buttons .equal-button'); 
   const decimalButton = document.querySelector('.calc-buttons .decimal');
   const negateButton = document.querySelector('.calc-buttons .negate');
+  const eraseButton = document.querySelector('.erase');
 
   const operators = {
     '+': (a, b) => Number(a) + Number(b), // to avoid a + b = 'ab'
@@ -33,6 +37,8 @@
 
   function addNumberToDisplay() {
     let numberToAdd = this.textContent;
+    canErase = true;
+    justUpdatedOperator = false;
 
     if (justCalculated && resetNumberDisplay) {
       justCalculated = false;
@@ -52,11 +58,19 @@
     decimalInNumber = false;
     if (currentOperator && !justCalculated) {
       currentOperator = this.textContent;
-      checkCalculable(true);
-      return;
+      if (currentOperator == previousOperator) {
+        justUpdatedOperator = true;
+        checkCalculable(true);
+        return;
+      }
+      else {
+        previousOperator = currentOperator;
+      }
     };
     if (justCalculated) justCalculated = false;
     currentOperator = this.textContent;
+    previousOperator = currentOperator;
+    justUpdatedOperator = true;
     updateCalculationDisplay(false);
     needToCleanCurrentDisplay = true;
     firstOperand = currentDisplay.textContent;
@@ -65,8 +79,8 @@
   function clearEverything() {
     currentDisplay.textContent = '0';
     calculationDisplay.textContent = '';
-    currentOperator = firstOperand = secondOperand = null;
-    decimalInNumber = false;
+    currentOperator = firstOperand = secondOperand = previousOperator= null;
+    decimalInNumber = justUpdatedOperator = false;
     currentDisplay.style.fontSize = window.getComputedStyle(currentDisplay).fontSize;
     calculationDisplay.style.fontSize = window.getComputedStyle(calculationDisplay).fontSize;
   }
@@ -98,7 +112,6 @@
   }
 
   function negateNumber() {
-    console.log("Negating");
     let displayContent = currentDisplay.textContent;
     
     if (displayContent.includes('-')) {
@@ -108,6 +121,27 @@
     }
     else if (displayContent !== '0' && displayContent !== '0.') {
       currentDisplay.textContent = `-${currentDisplay.textContent}`;
+    }
+  }
+
+  function erasePreviousInput() {
+    console.log(canErase);
+    let displayContent = currentDisplay.textContent;
+    if (justUpdatedOperator) {
+      currentOperator = previousOperator = null;
+      justUpdatedOperator = false;
+      canErase = false;
+      calculationDisplay.textContent = calculationDisplay.textContent.slice(0,-1);
+    }
+    else if (displayContent !== '0' && !justCalculated && canErase) {
+      if (displayContent.length == 1) {
+        currentDisplay.textContent = '0';
+        if (secondOperand) secondOperand = '0';
+      }
+      else {
+        currentDisplay.textContent = displayContent.slice(0, -1);
+      }
+      if (!currentDisplay.textContent.includes('.')) decimalInNumber = false;
     }
   }
 
@@ -124,6 +158,7 @@
       }
     }
   }
+
 
   /* Helper functions */
   function updateCalculationDisplay(justCalculated) {
@@ -147,6 +182,7 @@
     currentDisplay.textContent = calculatedValue;
     needToCleanCurrentDisplay = true;
     justCalculated = true;
+    justUpdatedOperator = false;
     if (secondOperand == null) secondOperand = second;
     updateCalculationDisplay(true);
     firstOperand = calculatedValue;
@@ -161,6 +197,7 @@
   equalButton.addEventListener('click', checkCalculable)
   decimalButton.addEventListener('click', addDecimal);
   negateButton.addEventListener('click', negateNumber);
+  eraseButton.addEventListener('click', erasePreviousInput);
   
 
   // Mutation Observer for when large number in calculator
