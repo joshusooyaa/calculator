@@ -36,6 +36,8 @@
   }
 
   function addNumberToDisplay() {
+    if (currentDisplay.textContent.length > 25 && !justUpdatedOperator) return;
+    
     let numberToAdd = this.textContent;
     canErase = true;
     justUpdatedOperator = false;
