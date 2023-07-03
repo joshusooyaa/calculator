@@ -46,8 +46,8 @@
   }
 
   function addOperatorToDisplay() {
-    if (currentOperator) return;
-
+    if (currentOperator && !justCalculated) return;
+    if (justCalculated) justCalculated = false;
     currentOperator = this.textContent;
     updateCalculationDisplay(false);
     needToCleanCurrentDisplay = true;
@@ -65,10 +65,10 @@
     if (currentOperator && secondOperand) {
       let calculatedValue = operate(firstOperand, currentOperator, secondOperand);
       currentDisplay.textContent = calculatedValue;
-      firstOperand = calculatedValue;
       needToCleanCurrentDisplay = true;
       justCalculated = true;
       updateCalculationDisplay(true);
+      firstOperand = calculatedValue;
     } 
   }
 
