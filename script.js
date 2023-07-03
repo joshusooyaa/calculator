@@ -24,7 +24,8 @@
 
   /* event listener functions */
   function operate(var1, operator, var2) {
-    return operators[operator](var1, var2);
+    result = operators[operator](var1, var2);
+    return parseFloat(result.toFixed(5));
   }
 
   function addNumberToDisplay() {
