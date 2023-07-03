@@ -33,15 +33,20 @@ body {
 }
 
 .calculator .display .calculation-display {
-  --smaller-font-size: 2.2vh;
+  --smaller-font-size: 2vh;
   
   flex: 1;
   font-size: var(--smaller-font-size); 
   white-space: nowrap;
+  margin-right: 1%;
+
 }
 
 .calculator .display .current-display {
   flex: 2;
+  display: flex;
+  align-items: flex-end;
+  margin-right: 1%;
 }
 
 .calculator .display p {
@@ -94,35 +99,3 @@ body {
 button:active, button.active {
   transform: scale(.98);
 }
-
-
-/*
-.calculator .calc-buttons {
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  width: 100%;
-  background-color: grey;
-  font-size: 4vh;
-}
-
-.calculator .calc-buttons .left-side{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-column: span 3;
-  border: none;
-}
-
-.calculator .calc-buttons .right-side {
-  display: grid;
-  grid-column: span 1;
-  border: none;
-}
-
-.calc-buttons .clear {
-  grid-column: span 2;
-}
-
-.calc-buttons div {
-  border: 1px solid black;
-}*/

@@ -211,9 +211,13 @@
   })
 
   window.addEventListener('keydown', (event) => {
-    console.log(event.code);
+    if (document.activeElement && document.activeElement.tagName === 'BUTTON') {
+      document.activeElement.blur();
+    }
+
     const button = document.querySelector(`button[data-key~="${event.code}"]`);
     if (button && !button.classList.contains('.active')) {
+      button.getBoundingClientRect
       button.classList.toggle('active');
       button.click();
     }
