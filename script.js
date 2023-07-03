@@ -79,7 +79,8 @@
       return;
     }
     if (currentOperator && secondOperand) calculateValue(firstOperand, currentOperator, secondOperand);
-    else if (currentOperator) calculateValue(firstOperand, currentOperator, firstOperand);
+    else if (currentOperator) calculateValue(firstOperand, currentOperator, currentDisplay.textContent);
+    resetNumberDisplay = (e === true) ? false : true; 
   }
 
   function addDecimal() {
@@ -98,6 +99,16 @@
 
   function negateNumber() {
     console.log("Negating");
+    let displayContent = currentDisplay.textContent;
+    
+    if (displayContent.includes('-')) {
+      currentDisplay.textContent = displayContent.replace('-', '');
+      if (secondOperand) secondOperand = currentDisplay.textContent;
+      else firstOperand = currentDisplay.textContent;
+    }
+    else if (displayContent !== '0' && displayContent !== '0.') {
+      currentDisplay.textContent = `-${currentDisplay.textContent}`;
+    }
   }
 
   function checkDisplayContentSize(mutationList) {
@@ -140,7 +151,6 @@
     updateCalculationDisplay(true);
     firstOperand = calculatedValue;
     decimalInNumber = false;
-    resetNumberDisplay = (e === true) ? false : true; 
   }
 
   /* event listeners */
