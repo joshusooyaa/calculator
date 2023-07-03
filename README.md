@@ -60,6 +60,19 @@ To start, a simple UI (to start) should be created fulfilling all the requiremen
 
 In regards to styling, I considered using a grid system for the buttons, and although this would make more sense, I was having issues centering the text in each button without causing other issues. Due to this, and also because I want to improve on working with flex, I used flex-wrap in combination with width %s to ensure every button was the same size.
 
+In regards to adding a number to display, multiple things need to be checked.
+
+`addNumberToDisplay`
+```
+if a calculation was just done
+    clear the calculator and start over
+
+check if a new input, or if adding number to the display
+    add to display or set number as new display
+
+if there's currently an operator, set the display content to the second operand variable
+```
+
 ## 2. Basic Functionality
 All four subproblems will rely on three variables: two operands and one operator. Seeing how this is the case, it's unlikely they need to be broken up into separate defined functions. However, due to the nature of Javascript, we cannot directly use the variable to do the work ex: ``return var1 operand var2;`` will not work. But, we can simplify things by using an object:
 ```
@@ -77,25 +90,34 @@ To get this set up, we'll need to add event listeners to all the operators. Each
 
 `addOperatorToDisplay`
 ```
-if operator already in use
-    ignore
-    // later on, instead of ignoring this will result in a calculation of the current display and then chain the pressed operator onto the next display
-// operator not in use
-    update current operator to this one
-    update display with this operator
-    update variable indicating that display needs to be cleaned on next number push
-    update first variable
+if operator already in use and a calculation wasn't just done
+    check if calculable with the pressed operator
+        // Calls for a calculation in the case that the user does something like: 5 + 1 = 6 + + which will result in the second operand being used to add again (result would be 7.)
+
+if just calculated, reset this indicator to false
+
+update current operator to this one
+update display with this operator
+update variable indicating that display needs to be cleaned on next number push
+update first variable
 ```
 
 Now that we have the operator functionality set up, all that's left to do here is calculate the result and update variables back to their appropriate states when the equal sign is pressed.
 
-`equalSignPressed`
+`checkCalculable`
 ```
+if secondOperand is 0
+    send error
 if operator in use
     check if there is a second variable
         call operate (function we defined earlier)
+        update calculation display (what was used to get calculation)
+        set a cleanup variable to true so that we know to clear the current display when a new number is inputted in
         update firstOperand to calculated value
+
+Check if called from an operator, in this case a number can be directly clicked after calculation. But if called from event (equal sign clicked) then a number cannot be directly clicked after since ideally a person is probably trying to enter in a new calculation than reuse the old one.
 ```
+
 
 
 

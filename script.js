@@ -1,11 +1,11 @@
 (function () {
   /* "global" variables */
-  let displayContent = '';
   let currentOperator = null;
   let needToCleanCurrentDisplay = false;
   let firstOperand = null;
   let secondOperand = null;
   let justCalculated = false;
+  let resetNumberDisplay = true;
 
   /* elements */
   const currentDisplay = document.querySelector('.display .current-display');
@@ -30,10 +30,11 @@
   function addNumberToDisplay() {
     let numberToAdd = this.textContent;
 
-    if (justCalculated) {
+    if (justCalculated && resetNumberDisplay) {
       justCalculated = false;
       clearEverything();
     }
+    if (justCalculated) justCalculated = false;
 
     if (needToCleanCurrentDisplay) cleanCurrentDisplay();
     
@@ -41,12 +42,14 @@
     else currentDisplay.textContent += numberToAdd;
     
     if (currentOperator) secondOperand = currentDisplay.textContent;
-
-    displayContent = currentDisplay.textContent;
   }
 
   function addOperatorToDisplay() {
-    if (currentOperator && !justCalculated) return;
+    if (currentOperator && !justCalculated) {
+      currentOperator = this.textContent;
+      checkCalculable(true);
+      return;
+    };
     if (justCalculated) justCalculated = false;
     currentOperator = this.textContent;
     updateCalculationDisplay(false);
@@ -57,12 +60,12 @@
   function clearEverything() {
     currentDisplay.textContent = '0';
     calculationDisplay.textContent = '';
-    displayContent = '';
-    currentOperator = null;
+    currentOperator = firstOperand = secondOperand = null;
+    
   }
 
-  function checkCalculable() {
-    if (secondOperand == 0) {
+  function checkCalculable(e) {
+    if (secondOperand == 0 && currentOperator === '/') {
       clearEverything();
       currentDisplay.textContent = 'ERROR';
     }
@@ -74,6 +77,8 @@
       updateCalculationDisplay(true);
       firstOperand = calculatedValue;
     } 
+
+    resetNumberDisplay = e === true ? false : true; 
   }
 
   /* Helper functions */
