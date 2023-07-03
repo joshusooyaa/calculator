@@ -44,7 +44,7 @@ body {
   flex: 1;
   padding: 0;
 
-  border: .12vw solid rgb(44, 44, 44);
+  /* border: .10vw solid rgb(44, 44, 44); */
   border-bottom: .15vw solid black;
   min-width: 200px;
 }
@@ -75,8 +75,6 @@ body {
   height: 80%;
   min-width: 200px;
   align-self: center;
-
-  border: .1vw solid rgb(44, 44, 44);
 }
 
 .calculator .calc-buttons .left-side {
